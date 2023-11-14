@@ -20,7 +20,7 @@ For locally running tasks, its parameters are fetched from a JSON file. When run
 
 Instructions for each task can be found in this README. Please use best practices in cleanliness and design.
 
-This challenge should take around an hour or so to complete, so please timebox your efforts. You should complete at least task #1 and two of the other tasks to demonstrate the generality of the object model. That said, if the object model is well thought out it should be straight forward by design to accomodate additional runtime use cases.
+This assessment should take around an hour or so to complete, so please timebox your efforts. You should complete at least task #1 and two of the other tasks to demonstrate the generality of the object model. That said, if the object model is well thought out it should be straight forward by design to accomodate additional runtime use cases.
 
 # Setup
 Create a virtual environment with the required Python libraries by running the following commands:
@@ -34,7 +34,7 @@ Create a virtual environment with the required Python libraries by running the f
 # Testing
 Run the unit tests as follows:
 
-pytest -vv
+`pytest -vv`
 
 # Task 1
 Implement the base object model classes in _task.py_. Update the _assignment.py_ module as needed to tie it in with the object model.
