@@ -1,1 +1,1 @@
-{"_default": {"1": {"name": "Widget", "parameters": {"first_name": "Peter", "last_name": "Porker"}}}}
+{"_default": {"1": {"name": "Widget", "parameters": {"first_name": "Peter", "last_name": "Porker"}},"2": {"name": "Gadget", "parameters": {"start_time": "768", "end_time": "1024"}}}}

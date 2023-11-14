@@ -16,9 +16,9 @@ We would like a general object model for running tasks (units of work) in any of
 
 Each task expects a set of configuration parameters, such as database connection details, that allows it to run regardless of to which runtime environment it is deployed.
 
-For locally running tasks, its parameters are fetched from a JSON file. When running in AWS Batch, we get the parameters from a TinyDB file. Finally, when running as a Lambda the parameters are passed in via the JSON Lambda event. If needed, bootstrapping of the task configuration is done via environment variables.
+For locally running tasks, its parameters are fetched from a JSON file. When running in AWS Batch, we get the parameters from a TinyDB database. Finally, when running as a Lambda the parameters are passed in via the JSON Lambda event. If needed, bootstrapping of the task configuration is done via environment variables.
 
-Instructions for each task can be found in this README. Please use best practices when solving these tasks.
+Instructions for each task can be found in this README. Please use best practices in cleanliness and design.
 
 This challenge should take around an hour or so to complete, so please timebox your efforts. You should complete at least task #1 and two of the other tasks to demonstrate the generality of the object model. That said, if the object model is well thought out it should be straight forward by design to accomodate additional runtime use cases.
 
