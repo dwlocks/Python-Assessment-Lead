@@ -13,7 +13,7 @@ class TaskRunner:
         if self.env == "local":
             self.all_parameters = self.load_local()
         elif self.env == "batch":
-            pass
+            self.all_parameters = self.load_batch()
         elif self.env == "lambda":
             pass
         else:
@@ -31,3 +31,6 @@ class TaskRunner:
     def load_local(self):
         with open("parameters.json", "r") as param_f:
             return json.load(param_f)
+
+    def get_local(self, task_type):
+        return self.all_parameters[task_type]
