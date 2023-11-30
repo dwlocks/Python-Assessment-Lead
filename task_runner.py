@@ -11,8 +11,7 @@ class TaskRunner:
         # if self.env is None:
         #     raise MissingTaskEnvironmentError()
         if self.env == "local":
-            with open("parameters.json", "r") as param_f:
-                self.all_parameters = json.load(param_f)
+            self.all_parameters = self.load_local()
         elif self.env == "batch":
             pass
         elif self.env == "lambda":
@@ -28,3 +27,7 @@ class TaskRunner:
             parameters = self.all_parameters["Gadget"]
 
         return task.run(parameters)
+
+    def load_local(self):
+        with open("parameters.json", "r") as param_f:
+            return json.load(param_f)
