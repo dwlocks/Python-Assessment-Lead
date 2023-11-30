@@ -47,7 +47,7 @@ def test_widget_runs_in_batch(batch_environment):
     assert text == "Peter Porker"
 
 
-def test_widget_runs_in_lambda(widget_lambda_event):
+def test_widget_runs_in_lambda(widget_lambda_event, lambda_env):
     text = None
 
     # Run the task as if running in a Lambda function and retrieve the task output
@@ -71,7 +71,7 @@ def test_gadget_runs_in_batch(batch_environment):
     assert duration == 256
 
 
-def test_gadget_runs_in_lambda(gadget_lambda_event):
+def test_gadget_runs_in_lambda(gadget_lambda_event, lambda_env):
     duration = None
 
     # Run the task as if running in a Lambda function and retrieve the task output
@@ -99,6 +99,7 @@ def gadget_parameters():
 def local_environment():
     current_environment = os.environ.copy()
 
+    os.environ["TASK_ENV"] = 'local'
     os.environ["PARAMETER_FILE"] = 'parameters.json'
 
     yield os.environ
@@ -111,7 +112,21 @@ def local_environment():
 def batch_environment():
     current_environment = os.environ.copy()
 
+    os.environ['TASK_ENV'] = 'batch'
     os.environ["PARAMETER_DATABASE"] = 'configuration_db.json'
+
+    yield os.environ
+
+    os.environ.clear()
+    os.environ.update(current_environment)
+
+
+@pytest.fixture
+def lambda_env():
+    current_environment = os.environ.copy()
+
+    # TODO: set lambda env in python-lambda-local runtime script?
+    os.environ['TASK_ENV'] = 'lambda'
 
     yield os.environ
 
@@ -122,6 +137,7 @@ def batch_environment():
 @pytest.fixture
 def widget_lambda_event():
     return {"first_name": "Miles", "last_name": "Morales"}
+
 
 @pytest.fixture
 def gadget_lambda_event():
