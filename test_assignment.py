@@ -2,9 +2,10 @@
 import os
 
 import pytest
-from   tinydb import TinyDB, Query
+from tinydb import TinyDB, Query
 
-from   assignment import WidgetTask, GadgetTask
+from assignment import WidgetTask, GadgetTask
+from task_runner import TaskRunner
 
 
 def test_widget(widget_parameters):
@@ -32,9 +33,15 @@ def test_gadget(gadget_parameters):
 
 
 def test_widget_runs_locally(local_environment):
+    runner = TaskRunner()
+    task = WidgetTask()
     text = None
 
     # Run the task as if running locally and retrieve the task output
+    output = runner.run(task)
+    assert len(output) == 1
+
+    text = output[0].decode()
 
     assert text == "Penny Parker"
 
@@ -57,6 +64,14 @@ def test_widget_runs_in_lambda(widget_lambda_event, lambda_env):
 
 def test_gadget_runs_locally(local_environment):
     duration = None
+    runner = TaskRunner()
+    task = GadgetTask()
+
+    # Run the task as if running locally and retrieve the task output
+    output = runner.run(task)
+    assert len(output) == 1
+
+    duration = int(output[0].decode())
 
     # Run the task as if running locally and retrieve the task output
 
