@@ -2,12 +2,13 @@ import os
 
 from assignment import WidgetTask, GadgetTask
 from env_handlers.batch_env_handler import BatchEnvHandler
+from env_handlers.lambda_env_handler import LambdaEnvHandler
 from env_handlers.local_env_handler import LocalEnvHandler
 from task import Task
 
 
 class TaskRunner:
-    def __init__(self):
+    def __init__(self, parameters=None):
         self.env = os.getenv("TASK_ENV", None)
         # if self.env is None:
         #     raise MissingTaskEnvironmentError()
@@ -16,6 +17,7 @@ class TaskRunner:
         elif self.env == "batch":
             self.env_handler = BatchEnvHandler()
         elif self.env == "lambda":
+            self.env_handler = LambdaEnvHandler(parameters)
             pass
         else:
             # raise UnknownEnvironmentError()

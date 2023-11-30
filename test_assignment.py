@@ -61,9 +61,14 @@ def test_widget_runs_in_batch(batch_environment):
 
 def test_widget_runs_in_lambda(widget_lambda_event, lambda_env):
     text = None
+    runner = TaskRunner(widget_lambda_event)
+    task = WidgetTask()
 
     # Run the task as if running in a Lambda function and retrieve the task output
+    output = runner.run(task)
+    assert len(output) == 1
 
+    text = output[0].decode()
     assert text == "Miles Morales"
 
 
@@ -77,7 +82,6 @@ def test_gadget_runs_locally(local_environment):
     assert len(output) == 1
 
     duration = int(output[0].decode())
-
     assert duration == 300
 
 
@@ -96,9 +100,14 @@ def test_gadget_runs_in_batch(batch_environment):
 
 def test_gadget_runs_in_lambda(gadget_lambda_event, lambda_env):
     duration = None
+    runner = TaskRunner(gadget_lambda_event)
+    task = GadgetTask()
 
     # Run the task as if running in a Lambda function and retrieve the task output
+    output = runner.run(task)
+    assert len(output) == 1
 
+    duration = int(output[0].decode())
     assert duration == 456
 
 
