@@ -4,7 +4,7 @@
         "last_name": "Parker"
     },
     "Gadget": {
-        "start_time": "1000",
-        "end_time": "700"
+        "start_time": "700",
+        "end_time": "1000"
     }
 }
