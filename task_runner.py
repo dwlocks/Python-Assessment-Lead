@@ -1,6 +1,7 @@
 import os
 
 from assignment import WidgetTask, GadgetTask
+from env_handlers.batch_env_handler import BatchEnvHandler
 from env_handlers.local_env_handler import LocalEnvHandler
 from task import Task
 
@@ -13,7 +14,7 @@ class TaskRunner:
         if self.env == "local":
             self.env_handler = LocalEnvHandler()
         elif self.env == "batch":
-            pass
+            self.env_handler = BatchEnvHandler()
         elif self.env == "lambda":
             pass
         else:

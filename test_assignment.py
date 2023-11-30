@@ -48,9 +48,14 @@ def test_widget_runs_locally(local_environment):
 
 def test_widget_runs_in_batch(batch_environment):
     text = None
+    runner = TaskRunner()
+    task = WidgetTask()
 
     # Run the task as if running in AWS Batch and retrieve the task output
+    output = runner.run(task)
+    assert len(output) == 1
 
+    text = output[0].decode()
     assert text == "Peter Porker"
 
 
@@ -73,16 +78,19 @@ def test_gadget_runs_locally(local_environment):
 
     duration = int(output[0].decode())
 
-    # Run the task as if running locally and retrieve the task output
-
     assert duration == 300
 
 
 def test_gadget_runs_in_batch(batch_environment):
     duration = None
+    runner = TaskRunner()
+    task = GadgetTask()
 
     # Run the task as if running in AWS Batch and retrieve the task output
+    output = runner.run(task)
+    assert len(output) == 1
 
+    duration = int(output[0].decode())
     assert duration == 256
 
 
