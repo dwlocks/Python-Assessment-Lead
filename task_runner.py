@@ -1,7 +1,7 @@
-import json
 import os
 
 from assignment import WidgetTask, GadgetTask
+from env_handlers.local_env_handler import LocalEnvHandler
 from task import Task
 
 
@@ -11,9 +11,9 @@ class TaskRunner:
         # if self.env is None:
         #     raise MissingTaskEnvironmentError()
         if self.env == "local":
-            self.all_parameters = self.load_local()
+            self.env_handler = LocalEnvHandler()
         elif self.env == "batch":
-            self.all_parameters = self.load_batch()
+            pass
         elif self.env == "lambda":
             pass
         else:
@@ -22,15 +22,8 @@ class TaskRunner:
 
     def run(self, task: Task):
         if isinstance(task, WidgetTask):
-            parameters = self.all_parameters["Widget"]
+            parameters = self.env_handler.get_params("Widget")
         elif isinstance(task, GadgetTask):
-            parameters = self.all_parameters["Gadget"]
+            parameters = self.env_handler.get_params("Gadget")
 
         return task.run(parameters)
-
-    def load_local(self):
-        with open("parameters.json", "r") as param_f:
-            return json.load(param_f)
-
-    def get_local(self, task_type):
-        return self.all_parameters[task_type]
